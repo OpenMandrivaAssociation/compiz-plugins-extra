@@ -38,6 +38,7 @@ scalefilter shelf showdesktop showmouse splash trailfocus widget.
 %package devel
 Summary: Development files for Compiz Extra Plugin Set for compiz
 Group: Development/X11
+Requires: %{name} = %{version}-%{release}
 %rename %{oldname}-devel
 
 %description devel
