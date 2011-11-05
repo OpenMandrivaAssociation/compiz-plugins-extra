@@ -1,77 +1,79 @@
-%define name compiz-fusion-plugins-extra
-%define newname compiz-plugins-extra
-%define version 0.8.6
-%define rel 3
+%define _disable_ld_no_undefined 1
+%define oldname compiz-fusion-plugins-extra
 
-Summary: Compiz Fusion Main Plugin Set for compiz
-Name: %{name}
-Version: %{version}
-Release: %mkrel %rel
-Source0: http://releases.compiz-fusion.org/%{version}/%{newname}-%{version}.tar.bz2
-Patch0:  compiz-plugins-extra-0.8.6-libnotify0.7.patch
+Summary: Compiz Main Plugin Set for compiz
+Name: compiz-plugins-extra
+Version: 0.9.5.92
+Release: 1
+Source0: http://releases.compiz.org/%{version}/%{name}-%{version}.tar.bz2
 Patch1:  0001-Treat-screenlets-windows-as-widgets.patch
-Patch2:  cubereflex-blue.patch
 License: GPL
 Group: System/X11
-URL: http://www.compiz-fusion.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: dbus-devel
-BuildRequires: compiz-devel >= %{version}
-BuildRequires: gettext-devel
+URL: http://www.compiz.org/
+
+BuildRequires: cmake
+BuildRequires: xsltproc
 BuildRequires: intltool
-BuildRequires: compiz-fusion-plugins-main-devel >= %{version}
-BuildRequires: compiz-bcop
-BuildRequires: libGConf2-devel
-BuildRequires: MesaGLU-devel
-BuildRequires: jpeg-devel
-BuildRequires: pango-devel
-BuildRequires: libnotify-devel
+BuildRequires: boost-devel
+BuildRequires: compiz-devel >= %{version} compiz
+BuildRequires: compiz-plugins-main-devel >= %{version}
+BuildRequires: mesaglu-devel
+BuildRequires: pkgconfig(gconf-2.0)
+BuildRequires: pkgconfig(gl)
+BuildRequires: pkgconfig(libnotify)
+BuildRequires: pkgconfig(gtk+-2.0)
 Requires: compiz
+%rename %{oldname}
 
 %description
-This is the main plugin set from the Compiz Fusion community.
+This is the main plugin set from the Compiz community. This is a 
+combination of the Compiz Extras and Beryl communities
 
-This is a combination of the Compiz Extras and Beryl communities
+Contains: 3d addhelper animationaddon bench bicubic crashhandler cubeaddon
+extrawm fadedesktop firepaint gears group loginout maximumize mblur reflex
+scalefilter shelf showdesktop showmouse splash trailfocus widget.
 
 #----------------------------------------------------------------------------
 
 %package devel
-Summary: Development files for Compiz Fusion Extra Plugin Set for compiz
+Summary: Development files for Compiz Extra Plugin Set for compiz
 Group: Development/X11
+%rename %{oldname}-devel
 
 %description devel
-Development files for Compiz Fusion Extra Plugin Set for compiz
+Development files for Compiz Extra Plugin Set for compiz
 
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn %{newname}-%{version}
-%patch0 -p0
+%setup -q
 %patch1 -p1
 
 %build
-%configure2_5x
+%cmake
+	-DCOMPIZ_INSTALL_GCONF_SCHEMA_DIR=%{_sysconfdir}/gconf/schemas \
+	-DCOMPIZ_DISABLE_SCHEMAS_INSTALL=TRUE \
+	-DCOMPIZ_PACKAGING_ENABLED=TRUE
+
 %make
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std
+%makeinstall_std -C build
 find %{buildroot} -name *.la -exec rm -f {} \;
-%find_lang %{newname}
+
 
 %clean
 rm -rf %{buildroot}
 
 #----------------------------------------------------------------------------
 
-%files -f %{newname}.lang
+%files
 %defattr(-,root,root)
-%{_libdir}/compiz/lib*.a
-%{_libdir}/compiz/lib*.so
-%{_datadir}/compiz/*.xml
-%{_datadir}/compiz/*.png
-
+%{_libdir}/compiz/*.so
+%{_datadir}/compiz/*
 
 %files devel
-%{_includedir}/compiz/*.h
+%{_includedir}/compiz/animationaddon
 %{_libdir}/pkgconfig/*.pc
+
