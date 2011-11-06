@@ -51,7 +51,7 @@ Development files for Compiz Extra Plugin Set for compiz
 %patch1 -p1
 
 %build
-%cmake
+%cmake \
 	-DCOMPIZ_INSTALL_GCONF_SCHEMA_DIR=%{_sysconfdir}/gconf/schemas \
 	-DCOMPIZ_DISABLE_SCHEMAS_INSTALL=TRUE \
 	-DCOMPIZ_PACKAGING_ENABLED=TRUE
@@ -64,13 +64,7 @@ rm -rf %{buildroot}
 find %{buildroot} -name *.la -exec rm -f {} \;
 
 
-%clean
-rm -rf %{buildroot}
-
-#----------------------------------------------------------------------------
-
 %files
-%defattr(-,root,root)
 %{_libdir}/compiz/*.so
 %{_datadir}/compiz/*
 
