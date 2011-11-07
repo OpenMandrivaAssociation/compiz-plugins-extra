@@ -65,6 +65,7 @@ find %{buildroot} -name *.la -exec rm -f {} \;
 
 
 %files
+%{_sysconfdir}/gconf/schemas
 %{_libdir}/compiz/*.so
 %{_datadir}/compiz/*
 
