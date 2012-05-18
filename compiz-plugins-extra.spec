@@ -3,7 +3,7 @@
 
 Summary: Compiz Main Plugin Set for compiz
 Name: compiz-plugins-extra
-Version: 0.9.5.92
+Version: 0.9.7.0
 Release: 1
 Source0: http://releases.compiz.org/%{version}/%{name}-%{version}.tar.bz2
 Patch1:  0001-Treat-screenlets-windows-as-widgets.patch
