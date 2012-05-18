@@ -22,6 +22,7 @@ BuildRequires: pkgconfig(gconf-2.0)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(libnotify)
 BuildRequires: pkgconfig(gtk+-2.0)
+BuildRequires: pkgconfig(pangocairo)
 Requires: compiz
 %rename %{oldname}
 
