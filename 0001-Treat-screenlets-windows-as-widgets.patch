@@ -1,0 +1,11 @@
+--- compiz-plugins-extra-0.9.5.92/widget/widget.xml.in.orig	2011-07-13 14:27:39.000000000 -0600
++++ compiz-plugins-extra-0.9.5.92/widget/widget.xml.in	2011-11-05 07:57:35.939440150 -0600
+@@ -36,7 +36,7 @@
+ 				<option name="match" type="match">
+ 					<_short>Widget Windows</_short>
+ 					<_long>Windows that always should be treated as widgets</_long>
+-					<default></default>
++					<default>class=Screenlet.py</default>
+ 				</option>
+ 				<option name="end_on_click" type="bool">
+ 					<_short>End Widget Mode on Click</_short>
