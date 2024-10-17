@@ -9,7 +9,7 @@ Source0: http://releases.compiz.org/%{version}/%{name}-%{version}.tar.bz2
 Patch1:  0001-Treat-screenlets-windows-as-widgets.patch
 License: GPL
 Group: System/X11
-URL: http://www.compiz.org/
+URL: https://www.compiz.org/
 
 BuildRequires: cmake
 BuildRequires: xsltproc
